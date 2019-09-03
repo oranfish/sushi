@@ -1,5 +1,6 @@
 package com.oranfish.sushiservice.service.impl;
 
+import com.oranfish.sushidao.dto.UCookieDTO;
 import com.oranfish.sushidao.dto.UUserDTO;
 import com.oranfish.sushidao.mapper.UUserMapper;
 import com.oranfish.sushiservice.service.UUserService;
@@ -17,5 +18,10 @@ public class UUserServiceImpl implements UUserService {
     @Override
     public List<UUserDTO> list() {
         return uUserMapper.list();
+    }
+
+    @Override
+    public UCookieDTO get(String userToken) {
+        return null;
     }
 }
