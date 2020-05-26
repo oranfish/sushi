@@ -1,12 +1,9 @@
 package com.oranfish.sushiweb.filter;
 
 import com.oranfish.sushiservice.cache.SessionCache;
-import com.oranfish.sushiservice.service.UUserService;
-import com.oranfish.sushiutil.util.RedisUtil;
 import com.oranfish.sushiweb.container.SessionContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -36,16 +33,16 @@ public class F1LoginFilter implements Filter {
                 }
             }
         }
-        if(userToken != null){
-            try {
-                sessionCache = RedisUtil.get(userToken, SessionCache.class);
-            } catch (Exception e) {
-                log.error(e.getMessage(), e);
-            }
-            if(sessionCache != null){
-                SessionContainer.setSession(sessionCache);
-            }
-        }
+//        if(userToken != null){
+//            try {
+//                sessionCache = RedisUtil.get(userToken, SessionCache.class);
+//            } catch (Exception e) {
+//                log.error(e.getMessage(), e);
+//            }
+//            if(sessionCache != null){
+//                SessionContainer.setSession(sessionCache);
+//            }
+//        }
         chain.doFilter(request, response);
         SessionContainer.clear();
     }
