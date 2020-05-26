@@ -20,12 +20,17 @@ public class MongoDbConfig {
     @Bean
     public MongoDbFactory mongoDbFactory(MongoDbProperties mongoDbProperties){
         String[] hostPortArray = mongoDbProperties.getHostport().split(":");
+
         MongoClient mongoClient = new MongoClient(new ServerAddress(hostPortArray[0], Integer.parseInt(hostPortArray[1])),
                 MongoCredential.createCredential(mongoDbProperties.getUsername(), mongoDbProperties.getDbname(), mongoDbProperties.getPassword().toCharArray()),
                 MongoClientOptions.builder()
-                        .socketTimeout(3000)
                         .minHeartbeatFrequency(25)
                         .heartbeatSocketTimeout(3000)
+                        .connectionsPerHost(mongoDbProperties.getConnectionsPerHost())
+                        .threadsAllowedToBlockForConnectionMultiplier(mongoDbProperties.getThreadsAllowedToBlockForConnectionMultiplier())
+                        .connectTimeout(mongoDbProperties.getConnectTimeout())
+                        .maxWaitTime(mongoDbProperties.getMaxWaitTime())
+                        .socketTimeout(mongoDbProperties.getSocketTimeout())
                         .build());
 
         //注册一个MongoDbFactory，连接到指定数据库
