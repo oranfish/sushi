@@ -8,6 +8,7 @@ import com.oranfish.sushiweb.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -24,7 +25,7 @@ public class UUserController extends BaseController {
     private RestTemplate restTemplate;
 
     @RequestMapping("/list")
-    public JsonResult list(UUserDTO uUserDTO){
+    public JsonResult list(@RequestBody UUserDTO uUserDTO){
 //        httpService.post("aaa");
         UUserDTO dto = uUserService.list().get(0);
         dto.setId(Long.parseLong(String.valueOf(System.currentTimeMillis())+"1234"));
